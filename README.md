@@ -1,4 +1,5 @@
 
 <img src="assets/AgeCalculator.jpg" />
-This is Simple Project called Age Calculator built using Vanilla JavaScript allong with some CSS and HTML. 
+<br />
+This is Simple Project called <q> <b>Age Calculator</b></q> built using Vanilla JavaScript allong with some CSS and HTML. 
 Build just for FUN 😊
