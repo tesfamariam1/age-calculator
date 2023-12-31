@@ -20,44 +20,32 @@ document.addEventListener('DOMContentLoaded', function () {
     // Get the current date
     var currentDate = new Date();
 
+    // Check if the date is valid
+    if (isNaN(day) || isNaN(month) || isNaN(year)) {
+      output.textContent = 'Please enter valid numbers.';
+      return;
+    } else if (day < 1 || day > 31 || month < 1 || month > 12 || year < 1900 || year > currentDate.getFullYear()) {
+      output.textContent = 'Please enter a valid date.';
+      return;
+    }
+
     // Combine the inputs into a string in the format "YYYY-MM-DD"
     var birthdateString = year + '-' + month + '-' + day;
 
     // Parse the birthdate string into a Date object
     var birthDateObj = new Date(birthdateString);
 
-    // Calculate the difference in milliseconds
-    var timeDiff = currentDate - birthDateObj;
+    // Calculate the age
+    var ageMilliseconds = currentDate - birthDateObj;
 
-    // Compare the years
-    var currentYear = currentDate.getFullYear();
-
-    console.log(year);
-    console.log(currentYear);
-    console.log(year > currentYear);
-    if (isNaN(day) || isNaN(month) || isNaN(year)) {
-      output.textContent = 'Please enter valid numbers.';
-      return;
-    }
-
-    // Check if the date is valid
-    if (day < 1 || day > 31) {
-      output.textContent = 'Please enter a valid date.';
-      return;
-    } else if(month < 1 || month > 12) {
-      output.textContent = 'Please enter a valid month.';
-      return;
-    } else if (year < 1900 || year > currentDate.getFullYear()) {
-      output.textContent = 'Please enter a valid year.';
-      return;
-    }
-
-
-    // Calculate the age by dividing the time difference by the number of milliseconds in a year
-    var age = Math.floor(timeDiff / (365.25 * 24 * 60 * 60 * 1000));
+    // Convert age from milliseconds to years, months, and days
+    var ageDate = new Date(ageMilliseconds);
+    var years = ageDate.getUTCFullYear() - 1970;
+    var months = ageDate.getUTCMonth();
+    var days = ageDate.getUTCDate() - 1; // Subtract 1 to adjust for 0-indexed days
 
     // Display the age
-    output.textContent = 'Your age is: ' + age + ' years.';
+    output.textContent = `Your age is: ${years} years, ${months} months, and ${days} days.`;
   }
 
   // Attach the calculateAge function to the button click event
